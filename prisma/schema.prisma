@@ -1,0 +1,349 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  CLIENT
+  SUPERADMIN
+}
+
+enum CourtStatus {
+  ACTIVE
+  MAINTENANCE
+  INACTIVE
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum PaymentPurpose {
+  RESERVATION
+  SUBSCRIPTION
+  TOURNAMENT
+}
+
+enum TournamentStatus {
+  DRAFT
+  OPEN
+  IN_PROGRESS
+  FINISHED
+  CANCELLED
+}
+
+enum MatchStatus {
+  SCHEDULED
+  PLAYED
+  CANCELLED
+}
+
+enum SubscriptionTier {
+  BASIC
+  PREMIUM
+  ELITE
+}
+
+enum TeamSubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  EXPIRED
+}
+
+enum CardType {
+  YELLOW
+  RED
+}
+
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  phone        String?
+  passwordHash String?
+  role         Role          @default(CLIENT)
+  reservations Reservation[]
+  payments     Payment[]
+  teams        Team[]        @relation("TeamCaptain")
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Court {
+  id           String        @id @default(cuid())
+  name         String
+  type         String        @default("Futbol 5")
+  description  String?
+  location     String?
+  hourlyRate   Decimal       @db.Decimal(10, 2)
+  capacity     Int?
+  isIndoor     Boolean       @default(false)
+  status       CourtStatus   @default(ACTIVE)
+  reservations Reservation[]
+  matches      Match[]
+  blockedSlots BlockedSlot[]
+  schedules    ScheduleConfig[]
+  priceRules   CourtPriceRule[]
+  fixedSubscriptions TeamSubscription[] @relation("FixedSubscriptionCourt")
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Reservation {
+  id              String            @id @default(cuid())
+  userId          String
+  courtId         String
+  startsAt        DateTime
+  durationMinutes Int               @default(60)
+  totalAmount     Decimal           @db.Decimal(10, 2)
+  depositAmount   Decimal           @db.Decimal(10, 2)
+  status          ReservationStatus @default(PENDING)
+  notes           String?
+  user            User              @relation(fields: [userId], references: [id])
+  court           Court             @relation(fields: [courtId], references: [id])
+  payments        Payment[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([courtId, startsAt])
+  @@index([userId])
+}
+
+model Payment {
+  id                 String            @id @default(cuid())
+  userId             String?
+  reservationId      String?
+  teamSubscriptionId String?
+  amount             Decimal           @db.Decimal(10, 2)
+  currency           String            @default("COP")
+  purpose            PaymentPurpose
+  status             PaymentStatus     @default(PENDING)
+  provider           String?
+  providerReference  String?
+  paidAt             DateTime?
+  user               User?             @relation(fields: [userId], references: [id])
+  reservation        Reservation?      @relation(fields: [reservationId], references: [id])
+  teamSubscription   TeamSubscription? @relation(fields: [teamSubscriptionId], references: [id])
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+
+  @@index([status])
+  @@index([providerReference])
+}
+
+model Team {
+  id             String             @id @default(cuid())
+  name           String
+  captainId      String?
+  contactPhone   String?
+  city           String?
+  captain        User?              @relation("TeamCaptain", fields: [captainId], references: [id])
+  players        Player[]
+  tournaments    TournamentTeam[]
+  subscriptions  TeamSubscription[]
+  homeMatches    Match[]            @relation("HomeMatches")
+  awayMatches    Match[]            @relation("AwayMatches")
+  goals          Goal[]
+  cards          Card[]
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+}
+
+model Player {
+  id             String   @id @default(cuid())
+  teamId         String
+  name           String
+  documentNumber String?
+  phone          String?
+  jerseyNumber   Int?
+  position       String?
+  goals          Int      @default(0)
+  yellowCards    Int      @default(0)
+  redCards       Int      @default(0)
+  team           Team     @relation(fields: [teamId], references: [id])
+  goalEvents     Goal[]
+  cardEvents     Card[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Tournament {
+  id             String           @id @default(cuid())
+  name           String
+  description    String?
+  startDate      DateTime?
+  endDate        DateTime?
+  inscriptionFee Decimal          @default(0) @db.Decimal(10, 2)
+  status         TournamentStatus @default(DRAFT)
+  teams          TournamentTeam[]
+  matches        Match[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+}
+
+model TournamentTeam {
+  id            String     @id @default(cuid())
+  tournamentId  String
+  teamId        String
+  points        Int        @default(0)
+  wins          Int        @default(0)
+  draws         Int        @default(0)
+  losses        Int        @default(0)
+  goalsFor      Int        @default(0)
+  goalsAgainst  Int        @default(0)
+  tournament    Tournament @relation(fields: [tournamentId], references: [id])
+  team          Team       @relation(fields: [teamId], references: [id])
+  createdAt     DateTime   @default(now())
+
+  @@unique([tournamentId, teamId])
+}
+
+model Match {
+  id           String      @id @default(cuid())
+  tournamentId String
+  courtId      String?
+  homeTeamId   String
+  awayTeamId   String
+  scheduledAt  DateTime?
+  homeScore    Int?
+  awayScore    Int?
+  status       MatchStatus @default(SCHEDULED)
+  tournament   Tournament  @relation(fields: [tournamentId], references: [id])
+  court        Court?      @relation(fields: [courtId], references: [id])
+  homeTeam     Team        @relation("HomeMatches", fields: [homeTeamId], references: [id])
+  awayTeam     Team        @relation("AwayMatches", fields: [awayTeamId], references: [id])
+  goals        Goal[]
+  cards        Card[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  @@index([tournamentId])
+  @@index([scheduledAt])
+}
+
+model SubscriptionPlan {
+  id                      String             @id @default(cuid())
+  name                    String
+  tier                    SubscriptionTier   @unique
+  monthlyPrice            Decimal            @db.Decimal(10, 2)
+  features                String[]
+  discountPercentage      Decimal            @default(0) @db.Decimal(5, 2)
+  hoursIncluded           Int                @default(0)
+  weeklyFixedReservation  Boolean            @default(false)
+  subscriptions           TeamSubscription[]
+  createdAt               DateTime           @default(now())
+  updatedAt               DateTime           @updatedAt
+}
+
+model TeamSubscription {
+  id               String                 @id @default(cuid())
+  teamId           String
+  planId           String
+  fixedCourtId     String?
+  status           TeamSubscriptionStatus @default(ACTIVE)
+  startDate        DateTime               @default(now())
+  endDate          DateTime?
+  fixedDayOfWeek   Int?
+  fixedTime        String?
+  monthlyAmount    Decimal                @db.Decimal(10, 2)
+  team             Team                   @relation(fields: [teamId], references: [id])
+  plan             SubscriptionPlan       @relation(fields: [planId], references: [id])
+  fixedCourt       Court?                 @relation("FixedSubscriptionCourt", fields: [fixedCourtId], references: [id])
+  payments         Payment[]
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  @@index([teamId])
+  @@index([status])
+}
+
+model Goal {
+  id        String   @id @default(cuid())
+  matchId   String
+  teamId    String
+  playerId  String?
+  minute    Int?
+  notes     String?
+  match     Match    @relation(fields: [matchId], references: [id])
+  team      Team     @relation(fields: [teamId], references: [id])
+  player    Player?  @relation(fields: [playerId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@index([matchId])
+  @@index([playerId])
+}
+
+model Card {
+  id        String   @id @default(cuid())
+  matchId   String
+  teamId    String
+  playerId  String?
+  type      CardType
+  minute    Int?
+  notes     String?
+  match     Match    @relation(fields: [matchId], references: [id])
+  team      Team     @relation(fields: [teamId], references: [id])
+  player    Player?  @relation(fields: [playerId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@index([matchId])
+  @@index([playerId])
+}
+
+model BlockedSlot {
+  id        String   @id @default(cuid())
+  courtId   String
+  startsAt  DateTime
+  endsAt    DateTime
+  reason    String?
+  court     Court    @relation(fields: [courtId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@index([courtId, startsAt])
+}
+
+model ScheduleConfig {
+  id          String   @id @default(cuid())
+  courtId     String?
+  dayOfWeek   Int
+  opensAt     String
+  closesAt    String
+  slotMinutes Int      @default(60)
+  isActive    Boolean  @default(true)
+  court       Court?   @relation(fields: [courtId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([courtId, dayOfWeek])
+}
+
+model CourtPriceRule {
+  id         String   @id @default(cuid())
+  courtId    String
+  dayOfWeek  Int?
+  startsAt   String?
+  endsAt     String?
+  hourlyRate Decimal  @db.Decimal(10, 2)
+  isActive   Boolean  @default(true)
+  court      Court    @relation(fields: [courtId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([courtId, dayOfWeek])
+}
