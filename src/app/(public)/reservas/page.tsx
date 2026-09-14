@@ -1,20 +1,28 @@
-import { ReservationCalendarPlaceholder } from "@/frontend/components/reservations/reservation-calendar-placeholder";
-import { ReservationSummary } from "@/frontend/components/reservations/reservation-summary";
+import { getCourts } from "@/backend/services/courts.service";
+import { ReservationForm } from "@/frontend/components/reservations/reservation-form";
 import { MainLayout } from "@/frontend/components/layout/main-layout";
 import { PageHeader } from "@/frontend/components/layout/page-header";
+import { StatusMessage } from "@/frontend/components/ui/status-message";
 
-export default function ReservationsPage() {
+export const dynamic = "force-dynamic";
+
+type PageProps = {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
+
+export default async function ReservationsPage({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const courts = await getCourts({ activeOnly: true });
+
   return (
     <MainLayout>
       <section className="mx-auto grid max-w-6xl gap-6 px-6 py-10">
         <PageHeader
-          title="Reservar cancha"
-          description="Flujo inicial para seleccionar fecha, hora, cancha y anticipo."
+          title="Reservar Cancha en Linea"
+          description="Selecciona tu cancha, fecha y horario. La reserva se guarda en tiempo real en la base de datos."
         />
-        <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
-          <ReservationCalendarPlaceholder />
-          <ReservationSummary />
-        </div>
+        <StatusMessage params={params} />
+        <ReservationForm courts={courts} />
       </section>
     </MainLayout>
   );
