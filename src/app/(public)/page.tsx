@@ -55,7 +55,7 @@ export default async function HomePage() {
 
   return (
     <MainLayout>
-      <section className="grid w-full gap-10 px-4 py-16 md:grid-cols-[1.1fr_0.9fr] md:items-center md:px-12">
+      <section className="grid w-full gap-10 px-0 py-16 md:grid-cols-[1.1fr_0.9fr] md:items-center">
         <div>
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-brand-700">
             SaaS para Canchas Sinteticas
