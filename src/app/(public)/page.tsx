@@ -16,23 +16,37 @@ const socialLinks = [
 export default function HomePage() {
   return (
     <MainLayout>
-      <section className="w-full bg-gradient-to-br from-slate-50 to-slate-100 px-4 py-16 md:px-8 md:py-24">
-        <div className="max-w-3xl">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-brand-700">
-            SaaS para Canchas Sintéticas
-          </p>
-          <h1 className="bg-gradient-to-r from-emerald-800 to-green-500 bg-clip-text text-4xl font-extrabold leading-tight text-transparent md:text-6xl">
-            Cancha Pro
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-700">
-            Plataforma web full-stack conectada a base de datos PostgreSQL para administrar
-            reservas en línea, anticipos, torneos, planes y reportes financieros desde un solo lugar.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="/reservas">Reservar cancha en línea</ButtonLink>
-            <ButtonLink href="/admin" variant="secondary">
-              Panel Administrador
-            </ButtonLink>
+      <section className="w-full border-b border-slate-200 bg-slate-50 px-4 py-16 md:px-8 md:py-24">
+        <div className="grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-20">
+          <div className="max-w-3xl">
+            <div className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-emerald-800">
+              <span className="h-1 w-10 bg-emerald-600" aria-hidden="true" />
+              SaaS para canchas sintéticas
+            </div>
+            <h1 className="max-w-2xl text-5xl font-extrabold leading-[0.98] tracking-[-0.04em] text-slate-950 md:text-7xl">
+              Pon tu operación en juego.
+            </h1>
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600 md:text-xl">
+              Cancha Pro centraliza reservas, anticipos y torneos para que tu equipo administre cada cancha con claridad y ritmo.
+            </p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <ButtonLink href="/reservas">Reservar cancha en línea</ButtonLink>
+              <ButtonLink href="/admin" variant="secondary">
+                Panel Administrador
+              </ButtonLink>
+            </div>
+          </div>
+
+          <div className="relative overflow-hidden bg-slate-950 p-7 text-white shadow-[12px_12px_0_0_theme(colors.emerald.600)]">
+            <div className="absolute right-0 top-0 h-24 w-24 border-b border-l border-emerald-500/40" aria-hidden="true" />
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">Cancha Pro / 01</p>
+            <p className="mt-16 max-w-[14rem] text-3xl font-extrabold leading-tight tracking-[-0.03em]">
+              Menos agenda. Más cancha.
+            </p>
+            <div className="mt-10 flex items-center gap-3 text-sm text-slate-400">
+              <span className="h-2 w-2 rounded-full bg-emerald-400" aria-hidden="true" />
+              Todo listo para el próximo partido
+            </div>
           </div>
         </div>
       </section>
