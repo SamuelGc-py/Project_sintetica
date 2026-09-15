@@ -6,6 +6,12 @@ const socialLinks = [
   { href: "https://x.com", label: "X", icon: "x" }
 ];
 
+const footerLinks = [
+  "Beneficios del sistema",
+  "Términos y condiciones",
+  "Políticas de privacidad"
+];
+
 export default function HomePage() {
   return (
     <MainLayout>
@@ -39,9 +45,20 @@ export default function HomePage() {
       </section>
 
       <footer className="w-full bg-slate-900 px-4 py-8 text-slate-300 md:px-12 md:py-10">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           <div>
-            <h2 className="bg-gradient-to-r from-emerald-800 to-green-500 bg-clip-text font-extrabold text-transparent">Síguenos</h2>
+            <h2 className="font-extrabold text-white">Enlaces</h2>
+            <nav className="mt-4 flex flex-col gap-2" aria-label="Enlaces del footer">
+              {footerLinks.map((link) => (
+                <a key={link} href="#" className="text-sm text-slate-300 transition-colors hover:text-white">
+                  {link}
+                </a>
+              ))}
+            </nav>
+          </div>
+
+          <div>
+            <h2 className="font-extrabold text-white">Síguenos</h2>
             <div className="mt-4 flex gap-3">
               {socialLinks.map((social) => (
                 <a
@@ -59,7 +76,7 @@ export default function HomePage() {
           </div>
 
           <div>
-            <h2 className="bg-gradient-to-r from-emerald-800 to-green-500 bg-clip-text font-extrabold text-transparent">Soporte</h2>
+            <h2 className="font-extrabold text-white">Soporte</h2>
             <a
               href="https://wa.me/573000000000"
               target="_blank"
