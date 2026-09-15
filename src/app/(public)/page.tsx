@@ -1,11 +1,5 @@
 import { MainLayout } from "@/frontend/components/layout/main-layout";
 
-const footerLinks = [
-  { href: "#beneficios", label: "Beneficios del sistema" },
-  { href: "/terminos", label: "Términos y condiciones" },
-  { href: "/privacidad", label: "Políticas de privacidad" }
-];
-
 const socialLinks = [
   { href: "https://instagram.com", label: "Instagram", icon: "ig" },
   { href: "https://facebook.com", label: "Facebook", icon: "f" },
@@ -45,18 +39,7 @@ export default function HomePage() {
       </section>
 
       <footer className="w-full bg-slate-900 px-4 py-8 text-slate-300 md:px-12 md:py-10">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          <div>
-            <h2 className="bg-gradient-to-r from-emerald-800 to-green-500 bg-clip-text font-extrabold text-transparent">Enlaces</h2>
-            <nav className="mt-4 flex flex-col gap-3 text-sm" aria-label="Enlaces del footer">
-              {footerLinks.map((link) => (
-                <a key={link.href} className="transition-colors hover:text-white" href={link.href}>
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-          </div>
-
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
             <h2 className="bg-gradient-to-r from-emerald-800 to-green-500 bg-clip-text font-extrabold text-transparent">Síguenos</h2>
             <div className="mt-4 flex gap-3">
@@ -69,7 +52,7 @@ export default function HomePage() {
                   aria-label={social.label}
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 text-sm font-semibold text-slate-300 transition-colors hover:border-white hover:text-white"
                 >
-                  {social.icon}
+                  <span aria-hidden="true" className="font-bold">{social.icon}</span>
                 </a>
               ))}
             </div>
@@ -81,9 +64,12 @@ export default function HomePage() {
               href="https://wa.me/573000000000"
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex items-center gap-2 rounded-md bg-green-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-green-700"
+              aria-label="Escríbenos en WhatsApp"
+              className="mt-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-600 text-white transition-colors hover:bg-green-700"
             >
-              Escríbenos en WhatsApp
+              <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true" fill="currentColor">
+                <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.5 4.1 1.6 5.9L.2 24l6.5-1.7a11.8 11.8 0 0 0 5.4 1.3h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.3-6.1-3.5-8.3Zm-8.4 18.1h-.1a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 1 1 8.5 4.7Zm5.4-7.3c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.7.9-.8 1.1-.2.2-.3.2-.6.1-1.6-.8-2.6-1.4-3.6-3.2-.3-.5.3-.5.8-1.6.1-.2.1-.4 0-.6l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1-1.1 2.5s1.1 2.9 1.3 3.1c.2.2 2.2 3.4 5.4 4.8 2 .9 2.8 1 3.8.8.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.1-1.4-.1-.2-.3-.3-.6-.4Z" />
+              </svg>
             </a>
           </div>
         </div>
