@@ -26,7 +26,7 @@ export function PublicNavbar() {
             href="/login"
             variant="ghost"
             size="sm"
-            className="bg-transparent px-4 py-2 text-white hover:bg-green-800 hover:text-white rounded-md"
+            className="rounded-md bg-transparent px-4 py-2 text-white hover:bg-white hover:text-green-800"
           >
             Login
           </ButtonLink>
