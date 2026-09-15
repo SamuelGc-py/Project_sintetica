@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/frontend/components/ui/button";
 import { Input } from "@/frontend/components/ui/input";
@@ -12,6 +11,7 @@ export default function LoginPage() {
     <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-12">
       <section className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_20px_60px_-24px_rgba(15,23,42,0.28)] sm:p-8">
         <div className="mb-8">
+          <p className="mb-5 text-3xl font-extrabold tracking-tight text-emerald-700">Cancha Pro</p>
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">Bienvenido de nuevo</p>
           <h1 className="text-3xl font-extrabold text-slate-950">Iniciar sesión</h1>
           <p className="mt-2 text-sm text-slate-600">Ingresa para continuar con la gestión de tu cancha.</p>
@@ -32,10 +32,8 @@ export default function LoginPage() {
               </svg>
             </button>
           </div>
-          <div className="-mt-1 flex justify-end"><Link className="text-sm font-semibold text-emerald-700 hover:text-emerald-900" href="/forgot-password">¿Olvidaste tu contraseña?</Link></div>
           <Button type="submit" className="h-12 w-full bg-emerald-700 font-semibold hover:bg-emerald-800">Entrar</Button>
         </form>
-        <p className="mt-8 text-center text-sm text-slate-600">¿Aún no tienes cuenta? <Link className="font-bold text-emerald-700 hover:text-emerald-900" href="/register">Crear una cuenta</Link></p>
       </section>
     </main>
   );
