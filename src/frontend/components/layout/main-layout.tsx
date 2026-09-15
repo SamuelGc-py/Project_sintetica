@@ -5,7 +5,7 @@ export function MainLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-slate-50">
       <PublicNavbar />
-      <main className="w-full px-4 md:px-12">{children}</main>
+      <main className="w-full">{children}</main>
     </div>
   );
 }
