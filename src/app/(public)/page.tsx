@@ -1,9 +1,10 @@
 import { MainLayout } from "@/frontend/components/layout/main-layout";
 
 const socialLinks = [
-  { href: "https://instagram.com", label: "Instagram", icon: "ig" },
-  { href: "https://facebook.com", label: "Facebook", icon: "f" },
-  { href: "https://x.com", label: "X", icon: "x" }
+  { href: "https://instagram.com", label: "Instagram", icon: "instagram" },
+  { href: "https://facebook.com", label: "Facebook", icon: "facebook" },
+  { href: "https://x.com", label: "X", icon: "x" },
+  { href: "https://youtube.com", label: "YouTube", icon: "youtube" }
 ];
 
 const footerLinks = [
@@ -69,7 +70,23 @@ export default function HomePage() {
                   aria-label={social.label}
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 text-sm font-semibold text-slate-300 transition-colors hover:border-white hover:text-white"
                 >
-                  <span aria-hidden="true" className="font-bold">{social.icon}</span>
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    {social.icon === "instagram" && (
+                      <>
+                        <rect x="3" y="3" width="18" height="18" rx="5" />
+                        <circle cx="12" cy="12" r="4" />
+                        <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none" />
+                      </>
+                    )}
+                    {social.icon === "facebook" && <path d="M14 8h2V4.5a10 10 0 0 0-3-.5c-3 0-5 1.8-5 5.2V12H5v4h3v8h4v-8h3.2l.8-4H12V9.5c0-1 .3-1.5 1.5-1.5H14Z" fill="currentColor" stroke="none" />}
+                    {social.icon === "x" && <path d="m5 4 14 16M19 4 5 20" />}
+                    {social.icon === "youtube" && (
+                      <>
+                        <path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8A26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8Z" />
+                        <path d="m10 15 5-3-5-3v6Z" fill="currentColor" stroke="none" />
+                      </>
+                    )}
+                  </svg>
                 </a>
               ))}
             </div>
