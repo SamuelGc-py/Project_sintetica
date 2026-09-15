@@ -13,7 +13,21 @@
 body {
   margin: 0;
   background: #f7faf7;
-  color: #13231b;
+  color: #334155;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 800;
+}
+
+button,
+a {
+  font-family: var(--font-inter), sans-serif;
 }
 
 a {
