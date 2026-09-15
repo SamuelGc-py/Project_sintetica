@@ -16,7 +16,7 @@ const footerLinks = [
 export default function HomePage() {
   return (
     <MainLayout>
-      <section className="w-full border-b border-slate-200 bg-slate-50 px-4 py-10 sm:px-6 md:px-8 md:py-12 lg:py-16">
+      <section className="w-full border-b border-slate-200 bg-slate-50 px-4 py-10 sm:px-6 md:px-16 md:py-12 lg:px-20 lg:py-16">
         <div className="grid w-full grid-cols-1 items-center gap-10 sm:gap-12 md:grid-cols-[minmax(0,1fr)_minmax(300px,360px)] md:gap-12 lg:gap-20">
           <div className="max-w-3xl">
             <div className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-emerald-800">
@@ -46,7 +46,7 @@ export default function HomePage() {
       </section>
 
       <footer className="w-full border-t border-slate-800 bg-slate-900 px-6 py-8 text-slate-300 md:px-16 md:py-10">
-        <div className="grid w-full grid-cols-1 gap-12 md:grid-cols-4">
+        <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-3 md:gap-16">
           <div>
             <h2 className="font-extrabold text-white">Enlaces</h2>
             <nav className="mt-4 flex flex-col gap-2" aria-label="Enlaces del footer">
