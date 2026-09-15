@@ -17,14 +17,14 @@ export default function HomePage() {
   return (
     <MainLayout>
       <section className="w-full border-b border-slate-200 bg-slate-50 px-4 py-16 md:px-8 md:py-24">
-        <div className="grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-20">
+        <div className="grid w-full grid-cols-1 items-center gap-12 md:grid-cols-[minmax(0,1fr)_360px] md:gap-20">
           <div className="max-w-3xl">
             <div className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-emerald-800">
               <span className="h-1 w-10 bg-emerald-600" aria-hidden="true" />
               SaaS para canchas sintéticas
             </div>
             <h1 className="max-w-2xl text-5xl font-extrabold leading-[0.98] tracking-[-0.04em] text-slate-950 md:text-7xl">
-              Pon tu operación en juego.
+              Cancha Pro
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600 md:text-xl">
               Cancha Pro centraliza reservas, anticipos y torneos para que tu equipo administre cada cancha con claridad y ritmo.
