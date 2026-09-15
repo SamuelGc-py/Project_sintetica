@@ -16,8 +16,8 @@ const footerLinks = [
 export default function HomePage() {
   return (
     <MainLayout>
-      <section className="w-full border-b border-slate-200 bg-slate-50 px-4 py-16 md:px-8 md:py-24">
-        <div className="grid w-full grid-cols-1 items-center gap-12 md:grid-cols-[minmax(0,1fr)_360px] md:gap-20">
+      <section className="w-full border-b border-slate-200 bg-slate-50 px-4 py-12 sm:px-6 md:px-8 md:py-16 lg:py-20">
+        <div className="grid w-full grid-cols-1 items-center gap-10 sm:gap-12 md:grid-cols-[minmax(0,1fr)_minmax(300px,360px)] md:gap-12 lg:gap-20">
           <div className="max-w-3xl">
             <div className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-emerald-800">
               <span className="h-1 w-10 bg-emerald-600" aria-hidden="true" />
