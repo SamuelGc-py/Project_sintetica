@@ -45,14 +45,7 @@ export default function HomePage() {
       </section>
 
       <footer className="w-full bg-slate-900 px-4 py-8 text-slate-300 md:px-12 md:py-10">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
-          <div>
-            <p className="text-xl font-bold text-white">Cancha Pro</p>
-            <p className="mt-4 max-w-xs text-sm leading-6">
-              La plataforma SaaS para administrar reservas y operaciones de canchas sintéticas.
-            </p>
-          </div>
-
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           <div>
             <h2 className="bg-gradient-to-r from-emerald-800 to-green-500 bg-clip-text font-extrabold text-transparent">Enlaces</h2>
             <nav className="mt-4 flex flex-col gap-3 text-sm" aria-label="Enlaces del footer">
@@ -88,7 +81,7 @@ export default function HomePage() {
               href="https://wa.me/573000000000"
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex items-center gap-2 rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-700"
+              className="mt-4 inline-flex items-center gap-2 rounded-md bg-green-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-green-700"
             >
               Escríbenos en WhatsApp
             </a>
