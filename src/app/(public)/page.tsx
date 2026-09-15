@@ -45,8 +45,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <footer className="w-full bg-slate-900 px-4 py-8 text-slate-300 md:px-12 md:py-10">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <footer className="w-full border-t border-slate-800 bg-slate-900 px-6 py-8 text-slate-300 md:px-16 md:py-10">
+        <div className="grid w-full grid-cols-1 gap-12 md:grid-cols-4">
           <div>
             <h2 className="font-extrabold text-white">Enlaces</h2>
             <nav className="mt-4 flex flex-col gap-2" aria-label="Enlaces del footer">
