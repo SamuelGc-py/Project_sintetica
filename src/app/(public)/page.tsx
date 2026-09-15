@@ -16,12 +16,12 @@ const socialLinks = [
 export default function HomePage() {
   return (
     <MainLayout>
-      <section className="w-full px-4 py-16 md:px-8 md:py-24">
+      <section className="w-full bg-gradient-to-br from-slate-50 to-slate-100 px-4 py-16 md:px-8 md:py-24">
         <div className="max-w-3xl">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-brand-700">
             SaaS para Canchas Sintéticas
           </p>
-          <h1 className="text-4xl font-bold leading-tight text-ink md:text-6xl">
+          <h1 className="bg-gradient-to-r from-emerald-800 to-green-500 bg-clip-text text-4xl font-extrabold leading-tight text-transparent md:text-6xl">
             Cancha Pro
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-700">
@@ -47,7 +47,7 @@ export default function HomePage() {
           </div>
 
           <div>
-            <h2 className="font-semibold text-white">Enlaces</h2>
+            <h2 className="bg-gradient-to-r from-emerald-800 to-green-500 bg-clip-text font-extrabold text-transparent">Enlaces</h2>
             <nav className="mt-4 flex flex-col gap-3 text-sm" aria-label="Enlaces del footer">
               {footerLinks.map((link) => (
                 <a key={link.href} className="transition-colors hover:text-white" href={link.href}>
@@ -58,7 +58,7 @@ export default function HomePage() {
           </div>
 
           <div>
-            <h2 className="font-semibold text-white">Síguenos</h2>
+            <h2 className="bg-gradient-to-r from-emerald-800 to-green-500 bg-clip-text font-extrabold text-transparent">Síguenos</h2>
             <div className="mt-4 flex gap-3">
               {socialLinks.map((social) => (
                 <a
@@ -76,7 +76,7 @@ export default function HomePage() {
           </div>
 
           <div>
-            <h2 className="font-semibold text-white">Soporte</h2>
+            <h2 className="bg-gradient-to-r from-emerald-800 to-green-500 bg-clip-text font-extrabold text-transparent">Soporte</h2>
             <a
               href="https://wa.me/573000000000"
               target="_blank"
