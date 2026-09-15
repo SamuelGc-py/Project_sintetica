@@ -1,4 +1,3 @@
-import { ButtonLink } from "@/frontend/components/ui/button";
 import { MainLayout } from "@/frontend/components/layout/main-layout";
 
 const footerLinks = [
@@ -23,18 +22,12 @@ export default function HomePage() {
               <span className="h-1 w-10 bg-emerald-600" aria-hidden="true" />
               SaaS para canchas sintéticas
             </div>
-            <h1 className="max-w-2xl text-5xl font-extrabold leading-[0.98] tracking-[-0.04em] text-slate-950 md:text-7xl">
+            <h1 className="max-w-2xl text-5xl font-extrabold leading-[0.98] tracking-[-0.04em] text-emerald-700 md:text-7xl">
               Cancha Pro
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600 md:text-xl">
               Cancha Pro centraliza reservas, anticipos y torneos para que tu equipo administre cada cancha con claridad y ritmo.
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/reservas">Reservar cancha en línea</ButtonLink>
-              <ButtonLink href="/admin" variant="secondary">
-                Panel Administrador
-              </ButtonLink>
-            </div>
           </div>
 
           <div className="relative overflow-hidden bg-slate-950 p-7 text-white shadow-[12px_12px_0_0_theme(colors.emerald.600)]">
