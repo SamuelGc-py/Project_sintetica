@@ -44,7 +44,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <footer className="w-full bg-slate-900 px-4 py-12 text-slate-300 md:px-12">
+      <footer className="w-full bg-slate-900 px-4 py-8 text-slate-300 md:px-12 md:py-10">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div>
             <p className="text-xl font-bold text-white">Cancha Pro</p>
