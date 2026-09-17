@@ -96,7 +96,7 @@ export function ClientSidebar() {
           </div>
         </div>
         <Link className="order-2 text-lg font-extrabold tracking-tight text-white md:order-3" href="/dashboard">
-          Project Synthetic
+          Cancha Pro
         </Link>
       </header>
 
